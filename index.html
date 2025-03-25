@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+        }
+
+        .calculatrice {
+            background: rgb(207, 26, 153);
+            padding: 20px;
+            border-radius: 25px;
+            width: 280px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+
+        #resultat {
+            width: 100%;
+            height: 90px;
+            font-size: 25px;
+            text-align: left;
+            margin-bottom: 10px;
+            padding: 10px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .boutons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            /* border-radius: 50%; */
+        }
+
+        button {
+            padding: 15px;
+            font-size: 20px;
+            border: 1px solid black;
+            border-radius: 25px;
+            cursor: pointer;
+            background-color: #eee;
+            transition: 0.3s;
+            box-shadow: 0px 4px 10px rgba(12, 12, 14, 0.842);
+        }
+
+        button:hover {
+            background-color: #ddd;
+        }
+
+        .btn-orange {
+            background-color: rgb(22, 22, 21);
+            color: white;
+        }
+
+        .btn-orange:hover {
+            background-color: rgb(7, 7, 7);
+        }
+
+        .btn-gray {
+            background-color: rgb(2, 2, 2);
+            color: white;
+        }
+
+        .btn-gray:hover {
+            background-color: rgb(207, 26, 153);
+            font-size: 28px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="calculatrice">
+        <input type="text" id="resultat" value="0" disabled>
+        <div class="boutons">
+            <button class="btn-gray" style="grid-column: span 2;" onclick="effacerTout()">AC</button>
+            <button class="btn-gray" onclick="effacer()">C</button>
+            <button class="btn-rose" onclick="ajouter('+')">+</button>
+
+            <button onclick="ajouter('7')">7</button>
+            <button onclick="ajouter('8')">8</button>
+            <button onclick="ajouter('9')">9</button>
+            <button class="btn-rose" onclick="ajouter('/')">/</button>
+            
+            <button onclick="ajouter('4')">4</button>
+            <button onclick="ajouter('5')">5</button>
+            <button onclick="ajouter('6')">6</button>
+            <button class="btn-rose" onclick="ajouter('*')">*</button>
+            
+            <button onclick="ajouter('1')">1</button>
+            <button onclick="ajouter('2')">2</button>
+            <button onclick="ajouter('3')">3</button>
+            <button class="btn-rose" onclick="ajouter('-')">-</button>
+            
+            <button onclick="ajouter('0')">0</button>
+            <button onclick="ajouter('.')">.</button>
+           
+            
+            <button class="btn-rose" style="grid-column: span 2;" onclick="calculer()">=</button>
+        </div>
+        
+    </div>
+<script>
+    let btn=document.querySelectorAll("button");
+    let inp=document.querySelector("input");
+    for(let i=0; i<btn.length; i++) {
+    btn[i].addEventListener("click" ,()=> {
+         let buttonText= btn[i].textContent;
+        if(buttonText === "=") {
+            calculateResult();
+        } else if (buttonText === "C")  {
+            clearDisplay();
+        } else if (buttonText === "AC") {
+            effacerTout();
+        }else {
+            inp.value += buttonText;
+        }
+
+         });
+
+      }
+      function effacerTout() {
+    document.getElementById("resultat").value = "0";
+}
+         effacerTout();
+      function calculer() {
+        try {
+            inp.value = eval(inp.value);  
+        } catch (error) {
+            inp.value = "Erreur";  
+        }
+    }
+    function effacer() {
+        inp.value = inp.value.slice(0, -1);
+    }
+    
+</script>
+</body>
+</html>
